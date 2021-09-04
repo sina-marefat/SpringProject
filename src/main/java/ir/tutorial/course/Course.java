@@ -1,11 +1,13 @@
-package ir.tutorial.topic;
+package ir.tutorial.course;
+
+import ir.tutorial.topic.Topic;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.Optional;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Topic {
+public class Course {
 
     @Id
     private String id;
@@ -14,13 +16,17 @@ public class Topic {
 
     private String description;
 
-    public Topic(String name, String id, String description) {
+    @ManyToOne
+    private Topic topic;
+
+    public Course(String name, String id, String description , String topicId) {
         this.name = name;
         this.id = id;
         this.description = description;
+        topic = new Topic(topicId,"","");
     }
 
-    public Topic() {
+    public Course() {
     }
     
 
@@ -46,5 +52,13 @@ public class Topic {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
     }
 }
